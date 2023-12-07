@@ -1,4 +1,4 @@
-package ru.t1consulting.charctercounter.aspect;
+package ru.t1consulting.charactercounter.aspect;
 
 import org.aspectj.lang.annotation.Pointcut;
 

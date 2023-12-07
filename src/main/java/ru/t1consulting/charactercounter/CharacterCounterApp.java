@@ -1,4 +1,4 @@
-package ru.t1consulting.charctercounter;
+package ru.t1consulting.charactercounter;
 
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.annotations.info.Contact;

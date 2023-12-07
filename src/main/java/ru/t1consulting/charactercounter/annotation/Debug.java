@@ -1,4 +1,4 @@
-package ru.t1consulting.charctercounter.annotation;
+package ru.t1consulting.charactercounter.annotation;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
