@@ -11,7 +11,7 @@ public class LoggingPointcuts {
     public void springBeanPointcut() {
     }
 
-    @Pointcut("within(ru.t1consulting.charctercounter..*)")
+    @Pointcut("within(ru.t1consulting.charactercounter..*)")
     public void applicationPackagePointcut() {
     }
 }

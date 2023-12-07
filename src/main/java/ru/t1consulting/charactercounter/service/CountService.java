@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import ru.t1consulting.charactercounter.GeneralProperties;
+import ru.t1consulting.charactercounter.annotation.Debug;
 import ru.t1consulting.charactercounter.dto.CommonRs;
 import ru.t1consulting.charactercounter.exception.*;
 
@@ -18,6 +19,7 @@ import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
+@Debug
 public class CountService {
 
     private final GeneralProperties generalProperties;
