@@ -1,0 +1,12 @@
+server:
+  port: 8086
+
+spring:
+  profiles:
+    active: '@spring.profiles.active@'
+
+logger:
+  path: logs
+  expired: PT168H
+  console:
+    thresholdFilter: '@logger.console.thresholdFilter@'
