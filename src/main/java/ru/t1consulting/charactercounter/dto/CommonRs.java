@@ -1,6 +1,8 @@
 package ru.t1consulting.charactercounter.dto;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.databind.PropertyNamingStrategies;
+import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -12,6 +14,8 @@ import java.util.Map;
 
 @Data
 @JsonInclude(JsonInclude.Include.NON_NULL)
+@JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
+@Schema(description = "Basic response with counting results")
 @NoArgsConstructor
 public class CommonRs {
     @Schema(example = "12432857239")

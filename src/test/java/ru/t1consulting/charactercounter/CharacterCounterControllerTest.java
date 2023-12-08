@@ -21,8 +21,7 @@ import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.multipart;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest
@@ -37,6 +36,16 @@ class CharacterCounterControllerTest {
     private final ObjectMapper objectMapper = new ObjectMapper();
 
     private final TestUtils testUtils = new TestUtils();
+
+    @Test
+    void checkHealthStatus() throws Exception {
+
+        MvcResult mvcResult = mockMvc.perform(get("/api/v1/health"))
+                .andExpect(status().isOk())
+                .andReturn();
+
+        assert mvcResult.getResponse().getContentAsString().equals("\"status\": \"UP\"");
+    }
 
     @Test
     void countCharactersInString() throws Exception {

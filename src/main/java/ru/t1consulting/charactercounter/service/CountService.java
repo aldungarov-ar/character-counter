@@ -12,6 +12,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
+import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Objects;
 import java.util.function.Function;
@@ -31,7 +32,9 @@ public class CountService {
                 .mapToObj(c -> (char) c)
                 .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
 
-        return new CommonRs(characterCountMap, "plainText");
+        Map<Character, Long> sortedResult = getSortedMap(characterCountMap);
+
+        return new CommonRs(sortedResult, "plainText");
     }
 
     private void validateInputString(String stringInput) {
@@ -60,11 +63,13 @@ public class CountService {
             throw new BadRequestException("Something wrong with file :((");
         }
 
+        Map<Character, Long> sortedResult = getSortedMap(charactersCountMap);
+
         String originalFilename = file.getOriginalFilename();
         int lastIndexOfDot = Objects.requireNonNull(originalFilename).lastIndexOf('.');
         String fileExtension = originalFilename.substring(lastIndexOfDot);
 
-        return new CommonRs(charactersCountMap, fileExtension);
+        return new CommonRs(sortedResult, fileExtension);
     }
 
     private void validateInputFile(MultipartFile file) {
@@ -105,5 +110,17 @@ public class CountService {
         }
 
         return originalFilename.substring(lastIndexOfDot);
+    }
+
+    public Map<Character, Long> getSortedMap(Map<Character, Long> unsortedMap) {
+
+        return unsortedMap.entrySet()
+                .stream()
+                .sorted(Map.Entry.<Character, Long>comparingByValue().reversed())
+                .collect(Collectors.toMap(
+                        Map.Entry::getKey,
+                        Map.Entry::getValue,
+                        (e1, e2) -> e1,
+                        LinkedHashMap::new));
     }
 }
