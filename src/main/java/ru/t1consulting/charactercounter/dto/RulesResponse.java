@@ -14,7 +14,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class RulesResponse {
 
-    private ErrorRs errorResponse;
     @Schema(description = "Maximal string length", example = "10000")
     private int maxStringLength;
     @Schema(description = "Maximal file size in bytes", example = "128")

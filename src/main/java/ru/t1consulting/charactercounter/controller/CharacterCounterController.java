@@ -1,13 +1,15 @@
 package ru.t1consulting.charactercounter.controller;
 
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.ExampleObject;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import ru.t1consulting.charactercounter.annotation.BasicSwaggerDescription;
 import ru.t1consulting.charactercounter.annotation.Info;
 import ru.t1consulting.charactercounter.dto.CommonRs;
-import ru.t1consulting.charactercounter.dto.RulesResponse;
 import ru.t1consulting.charactercounter.service.CountService;
-import ru.t1consulting.charactercounter.service.RulesService;
 
 @RestController
 @RequiredArgsConstructor
@@ -15,21 +17,17 @@ import ru.t1consulting.charactercounter.service.RulesService;
 @Info
 public class CharacterCounterController {
 
-    private final RulesService rulesService;
     private final CountService countService;
 
     @GetMapping("/health")
+    @ApiResponse(responseCode = "200",
+            content = @Content(examples = @ExampleObject(value = "\"status\": \"UP\"")))
     public String checkHealth() {
 
         return "\"status\": \"UP\"";
     }
 
-    @GetMapping("/rules")
-    public RulesResponse getRules() {
-
-        return rulesService.getRules();
-    }
-
+    @BasicSwaggerDescription(summary = "Count all characters in given FILE")
     @PutMapping(value = "/count/file", produces = "application/json", consumes = "multipart/form-data")
     public CommonRs countCharactersInFile(@RequestBody(required = false) MultipartFile file) {
 
@@ -37,6 +35,7 @@ public class CharacterCounterController {
     }
 
 
+    @BasicSwaggerDescription(summary = "Count all characters in given STRING")
     @PutMapping(value = "/count/string", produces = "application/json", consumes = "text/plain")
     public CommonRs countCharactersInString(@RequestBody(required = false) String plainTextRequest) {
 

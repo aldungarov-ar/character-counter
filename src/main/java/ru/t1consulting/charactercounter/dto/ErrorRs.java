@@ -18,7 +18,7 @@ public class ErrorRs {
     private String error;
     @Schema(description = "error time in timestamp", example = "12432857239")
     private Long timestamp;
-    @Schema(description = "description of error", example = "Данный формат файла не поддерживается")
+    @Schema(description = "description of error", example = "Данный формат ввода не поддерживается")
     private String errorDescription;
 
     public ErrorRs(RuntimeException exception) {

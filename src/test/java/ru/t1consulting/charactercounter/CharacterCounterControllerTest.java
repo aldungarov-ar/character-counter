@@ -1,7 +1,6 @@
 package ru.t1consulting.charactercounter;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.json.JSONObject;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -77,10 +76,7 @@ class CharacterCounterControllerTest {
                 .andReturn();
 
         String resultContentAsString = mvcResult.getResponse().getContentAsString();
-        JSONObject jsonObject = new JSONObject(resultContentAsString);
-
-        String errorRsAsString = jsonObject.get("error_response").toString();
-        ErrorRs errorRs = objectMapper.readValue(errorRsAsString, ErrorRs.class);
+        ErrorRs errorRs = objectMapper.readValue(resultContentAsString, ErrorRs.class);
 
         assert errorRs != null;
         assert errorRs.getErrorDescription() != null;
@@ -98,10 +94,7 @@ class CharacterCounterControllerTest {
                 .andReturn();
 
         String resultContentAsString = mvcResult.getResponse().getContentAsString();
-        JSONObject jsonObject = new JSONObject(resultContentAsString);
-
-        String errorRsAsString = jsonObject.get("error_response").toString();
-        ErrorRs errorRs = objectMapper.readValue(errorRsAsString, ErrorRs.class);
+        ErrorRs errorRs = objectMapper.readValue(resultContentAsString, ErrorRs.class);
 
         assert errorRs != null;
         assert errorRs.getErrorDescription() != null;
@@ -155,10 +148,7 @@ class CharacterCounterControllerTest {
                 .andReturn();
 
         String resultContentAsString = mvcResult.getResponse().getContentAsString();
-        JSONObject jsonObject = new JSONObject(resultContentAsString);
-
-        String errorRsAsString = jsonObject.get("error_response").toString();
-        ErrorRs errorRs = objectMapper.readValue(errorRsAsString, ErrorRs.class);
+        ErrorRs errorRs = objectMapper.readValue(resultContentAsString, ErrorRs.class);
 
         assert errorRs != null;
         assert errorRs.getErrorDescription() != null;
@@ -179,10 +169,7 @@ class CharacterCounterControllerTest {
                 .andReturn();
 
         String resultContentAsString = mvcResult.getResponse().getContentAsString();
-        JSONObject jsonObject = new JSONObject(resultContentAsString);
-
-        String errorRsAsString = jsonObject.get("error_response").toString();
-        ErrorRs errorRs = objectMapper.readValue(errorRsAsString, ErrorRs.class);
+        ErrorRs errorRs = objectMapper.readValue(resultContentAsString, ErrorRs.class);
 
         assert errorRs != null;
         assert errorRs.getErrorDescription() != null;
@@ -203,10 +190,7 @@ class CharacterCounterControllerTest {
                 .andReturn();
 
         String resultContentAsString = mvcResult.getResponse().getContentAsString();
-        JSONObject jsonObject = new JSONObject(resultContentAsString);
-
-        String errorRsAsString = jsonObject.get("error_response").toString();
-        ErrorRs errorRs = objectMapper.readValue(errorRsAsString, ErrorRs.class);
+        ErrorRs errorRs = objectMapper.readValue(resultContentAsString, ErrorRs.class);
 
         assert errorRs != null;
         assert errorRs.getErrorDescription() != null;
@@ -227,10 +211,7 @@ class CharacterCounterControllerTest {
                 .andReturn();
 
         String resultContentAsString = mvcResult.getResponse().getContentAsString();
-        JSONObject jsonObject = new JSONObject(resultContentAsString);
-
-        String errorRsAsString = jsonObject.get("error_response").toString();
-        ErrorRs errorRs = objectMapper.readValue(errorRsAsString, ErrorRs.class);
+        ErrorRs errorRs = objectMapper.readValue(resultContentAsString, ErrorRs.class);
 
         assert errorRs != null;
         assert errorRs.getErrorDescription() != null;

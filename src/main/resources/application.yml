@@ -20,3 +20,7 @@ logger:
   expired: PT168H
   console:
     thresholdFilter: '@logger.console.thresholdFilter@'
+
+springdoc:
+  swagger-ui:
+    path: /swagger-ui
