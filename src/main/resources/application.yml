@@ -10,6 +10,7 @@ input:
 spring:
   profiles:
     active: '@spring.profiles.active@'
+
   servlet:
     multipart:
       max-file-size: 10MB

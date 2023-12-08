@@ -1,0 +1,7 @@
+version: '3.8'
+
+services:
+  charactercounter:
+    build: .
+    ports:
+      - "8086:8086"

@@ -3,15 +3,11 @@ package ru.t1consulting.charactercounter;
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.annotations.info.Contact;
 import io.swagger.v3.oas.annotations.info.Info;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
 import org.springframework.boot.context.properties.ConfigurationPropertiesScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
-import org.springframework.scheduling.annotation.EnableScheduling;
 
 
 @OpenAPIDefinition(
@@ -25,13 +21,10 @@ import org.springframework.scheduling.annotation.EnableScheduling;
                 )
         )
 )
-@SpringBootApplication(exclude = {SecurityAutoConfiguration.class})
+@SpringBootApplication
 @ConfigurationPropertiesScan
-@EnableScheduling
 @Configuration
 @EnableAspectJAutoProxy
-@Slf4j
-@RequiredArgsConstructor
 public class CharacterCounterApp {
 
     public static void main(String[] args) {
