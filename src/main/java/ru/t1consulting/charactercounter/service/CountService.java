@@ -68,6 +68,7 @@ public class CountService {
     }
 
     private void validateInputFile(MultipartFile file) {
+
         if (file == null || file.isEmpty()) {
             throw new BadRequestException("The file is empty");
         }
@@ -83,15 +84,26 @@ public class CountService {
         if (fileLength > generalProperties.getMaxFileSizeBytes()) {
             throw new InputFileIsTooBigException("File size should not be larger then " +
                     generalProperties.getMaxFileSizeBytes() + " bytes");
-        } else {
-            String originalFilename = file.getOriginalFilename();
-            int lastIndexOfDot = Objects.requireNonNull(originalFilename).lastIndexOf(".");
-            String fileExtension = originalFilename.substring(lastIndexOfDot);
-
-            if (!generalProperties.getTypesAllowed().contains(fileExtension)) {
-                throw new FileTypeNotSupportedException("File type is not supported. " +
-                        "Supported file types: " + generalProperties.getTypesAllowed());
-            }
         }
+
+        String fileExtension = getFileExtension(file);
+
+        if (!generalProperties.getTypesAllowed().contains(fileExtension)) {
+            throw new FileTypeNotSupportedException("File type is not supported. " +
+                    "Supported file types: " + generalProperties.getTypesAllowed());
+        }
+    }
+
+    private String getFileExtension(MultipartFile file) {
+
+        String originalFilename = file.getOriginalFilename();
+        int lastIndexOfDot = Objects.requireNonNull(originalFilename).lastIndexOf(".");
+
+        if (lastIndexOfDot < 0) {
+            throw new FileTypeNotSupportedException("File type is not supported. " +
+                    "Supported file types: " + generalProperties.getTypesAllowed());
+        }
+
+        return originalFilename.substring(lastIndexOfDot);
     }
 }
