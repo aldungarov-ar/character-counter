@@ -1,12 +1,26 @@
 server:
   port: 8086
 
+input:
+  typesAllowed: ['Plain text String', '.txt']
+  maxPlainStringLength: 5_000_000
+  maxFileSizeBytes: 5000000
+
+
 spring:
   profiles:
     active: '@spring.profiles.active@'
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
 
 logger:
   path: logs
   expired: PT168H
   console:
     thresholdFilter: '@logger.console.thresholdFilter@'
+
+springdoc:
+  swagger-ui:
+    path: /swagger-ui

@@ -1,4 +1,4 @@
-package ru.t1consulting.charctercounter;
+package ru.t1consulting.charactercounter;
 
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.annotations.info.Contact;
@@ -19,7 +19,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
                 title = "Character counter API",
                 description = "API counting characters in given input", version = "1.0.0",
                 contact = @Contact(
-                        name = "Artem A",
+                        name = "Artem Aldungarov",
                         url = "https://github.com/aldungarov-ar/character-counter.git",
                         email = "aldungarov.ar@gmail.com"
                 )
