@@ -19,12 +19,11 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.util.Map;
-import java.util.Random;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.multipart;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest
@@ -37,20 +36,8 @@ class CharacterCounterControllerTest {
     private GeneralProperties generalProperties;
 
     private final ObjectMapper objectMapper = new ObjectMapper();
-    private final Random random = new Random();
 
-
-    @Test
-    void getRules() throws Exception {
-        mockMvc.perform(get("/api/v1/rules"))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.max_string_length")
-                        .value(generalProperties.getMaxPlainStringLength()))
-                .andExpect(jsonPath("$.max_file_size_bytes")
-                        .value(generalProperties.getMaxFileSizeBytes()))
-                .andExpect(jsonPath("$.allowed_inputs")
-                        .value(generalProperties.getTypesAllowed().toString()));
-    }
+    private final TestUtils testUtils = new TestUtils();
 
     @Test
     void countCharactersInString() throws Exception {
@@ -102,7 +89,7 @@ class CharacterCounterControllerTest {
 
     @Test
     void countCharactersInputStringIsTooLong() throws Exception {
-        String hugeString = generateHugeString();
+        String hugeString = testUtils.generateHugeString(generalProperties.getMaxPlainStringLength());
 
         MvcResult mvcResult = mockMvc.perform(put("/api/v1/count/string")
                         .contentType("text/plain")
@@ -119,19 +106,6 @@ class CharacterCounterControllerTest {
         assert errorRs != null;
         assert errorRs.getErrorDescription() != null;
         assert !errorRs.getErrorDescription().isEmpty();
-    }
-
-    private String generateHugeString() {
-        int maxPlainStringLength = generalProperties.getMaxPlainStringLength();
-
-        StringBuilder sb = new StringBuilder();
-
-        for (int i = 0; i < maxPlainStringLength + 1; i++) {
-            char c = (char) (random.nextInt('z' - 'a') + 'a');
-            sb.append(c);
-        }
-
-        return sb.toString();
     }
 
     @Test
@@ -169,7 +143,7 @@ class CharacterCounterControllerTest {
     @Test
     void countCharactersInputFileIsTooBig() throws Exception {
 
-        String hugeString = generateHugeString();
+        String hugeString = testUtils.generateHugeString(generalProperties.getMaxFileSizeBytes());
 
         MockMultipartFile file = new MockMultipartFile("file", "testFile.txt",
                 MediaType.TEXT_PLAIN_VALUE, hugeString.getBytes());
