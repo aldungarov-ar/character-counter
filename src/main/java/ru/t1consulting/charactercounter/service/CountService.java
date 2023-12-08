@@ -3,8 +3,8 @@ package ru.t1consulting.charactercounter.service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
-import ru.t1consulting.charactercounter.GeneralProperties;
 import ru.t1consulting.charactercounter.annotation.Debug;
+import ru.t1consulting.charactercounter.config.GeneralProperties;
 import ru.t1consulting.charactercounter.dto.CommonRs;
 import ru.t1consulting.charactercounter.exception.*;
 

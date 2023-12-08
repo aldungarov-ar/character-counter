@@ -1,4 +1,4 @@
-package ru.t1consulting.charactercounter;
+package ru.t1consulting.charactercounter.config;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;

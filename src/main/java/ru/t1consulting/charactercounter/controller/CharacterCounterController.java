@@ -1,4 +1,4 @@
-package ru.t1consulting.charactercounter;
+package ru.t1consulting.charactercounter.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -31,14 +31,14 @@ public class CharacterCounterController {
     }
 
     @PutMapping(value = "/count/file", produces = "application/json", consumes = "multipart/form-data")
-    public CommonRs countCharacters(@RequestBody MultipartFile file) {
+    public CommonRs countCharactersInFile(@RequestBody(required = false) MultipartFile file) {
 
         return countService.countFileCharacters(file);
     }
 
 
     @PutMapping(value = "/count/string", produces = "application/json", consumes = "text/plain")
-    public CommonRs countCharacters(@RequestBody String plainTextRequest) {
+    public CommonRs countCharactersInString(@RequestBody(required = false) String plainTextRequest) {
 
         return countService.countPlainTextCharacters(plainTextRequest);
     }
